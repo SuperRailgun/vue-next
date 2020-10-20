@@ -8,11 +8,25 @@ import { RendererOptions } from '@vue/runtime-core'
 
 const nativeOnRE = /^on[a-z]/
 
+// 生成 dom 对应的 type 定义
 type DOMRendererOptions = RendererOptions<Node, Element>
 
+// TODO: key === 'value' => forcePatchProp
 export const forcePatchProp: DOMRendererOptions['forcePatchProp'] = (_, key) =>
   key === 'value'
 
+/**
+ *
+ * @param el
+ * @param key
+ * @param prevValue
+ * @param nextValue
+ * @param isSVG
+ * @param prevChildren
+ * @param parentComponent
+ * @param parentSuspense
+ * @param unmountChildren
+ */
 export const patchProp: DOMRendererOptions['patchProp'] = (
   el,
   key,

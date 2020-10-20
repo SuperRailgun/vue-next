@@ -64,7 +64,9 @@ export function patchEvent(
   instance: ComponentInternalInstance | null = null
 ) {
   // vei = vue event invokers
+  // 从元素对象中拿到 invokers
   const invokers = el._vei || (el._vei = {})
+  // 对该事件是否已经在 invokers 中了
   const existingInvoker = invokers[rawName]
   if (nextValue && existingInvoker) {
     // patch

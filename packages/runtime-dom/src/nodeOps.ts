@@ -7,6 +7,10 @@ const doc = (typeof document !== 'undefined' ? document : null) as Document
 let tempContainer: HTMLElement
 let tempSVGContainer: SVGElement
 
+// Omit<...> 去掉 patchProp, 不去实现 patchProp
+/**
+ * dom 操作
+ */
 export const nodeOps: Omit<RendererOptions<Node, Element>, 'patchProp'> = {
   insert: (child, parent, anchor) => {
     parent.insertBefore(child, anchor || null)

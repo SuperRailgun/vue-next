@@ -126,6 +126,7 @@ export function createAppAPI<HostElement>(
 
     let isMounted = false
 
+    // 将 APP 挂载到上下文中
     const app: App = (context.app = {
       _uid: uid++,
       _component: rootComponent as ConcreteComponent,
@@ -210,8 +211,11 @@ export function createAppAPI<HostElement>(
         return app
       },
 
+      // 这里的 mount 相当于 父类中的方法，会被子类覆盖的方法调用
       mount(rootContainer: HostElement, isHydrate?: boolean): any {
+        // 闭包将 isMounted 包裹在内了，其实就是对 class 中属性的一种实践。
         if (!isMounted) {
+          // 如果没有挂载，就创建
           const vnode = createVNode(
             rootComponent as ConcreteComponent,
             rootProps

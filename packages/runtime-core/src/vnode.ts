@@ -390,6 +390,7 @@ function _createVNode(
     )
   }
 
+  // 最重要的 vnode 对象的创建
   const vnode: VNode = {
     __v_isVNode: true,
     [ReactiveFlags.SKIP]: true,

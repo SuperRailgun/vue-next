@@ -99,6 +99,7 @@ export const isReservedProp = /*#__PURE__*/ makeMap(
     'onVnodeBeforeUnmount,onVnodeUnmounted'
 )
 
+// 缓存提升性能
 const cacheStringFunction = <T extends (str: string) => string>(fn: T): T => {
   const cache: Record<string, string> = Object.create(null)
   return ((str: string) => {
@@ -107,12 +108,14 @@ const cacheStringFunction = <T extends (str: string) => string>(fn: T): T => {
   }) as any
 }
 
+// foo-bar -> -b
 const camelizeRE = /-(\w)/g
 /**
  * @private
  */
 export const camelize = cacheStringFunction(
   (str: string): string => {
+    // replace(.., (match, p1, offset, string))
     return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''))
   }
 )
